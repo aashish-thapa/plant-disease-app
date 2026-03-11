@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - PlantDoc{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Welcome, {{ current_user.name }}</h1>
+</div>
+
+<div class="stat-grid">
+    <div class="stat-card">
+        <div class="stat-value">{{ total }}</div>
+        <div class="stat-label">Total Diagnoses</div>
+    </div>
+    <div class="stat-card">
+        <a href="{{ url_for('diagnosis.upload') }}" style="text-decoration: none; color: inherit;">
+            <div class="stat-value" style="color: var(--color-primary-light);">+</div>
+            <div class="stat-label">New Diagnosis</div>
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Recent diagnoses</div>
+    {% if recent %}
+    <div class="history-list">
+        {% for d in recent %}
+        <a href="{{ url_for('diagnosis.result', diagnosis_id=d.id) }}" class="history-item">
+            <img class="history-thumb" src="{{ url_for('diagnosis.uploaded_file', filename=d.image_filename) }}" alt="Leaf">
+            <div class="history-info">
+                <div class="history-disease">{{ d.predicted_disease }}</div>
+                <div class="history-meta">{{ d.created_at.strftime('%b %d, %Y at %I:%M %p') }}</div>
+            </div>
+            <span class="history-confidence confidence-tag {% if d.confidence >= 0.70 %}confidence-high{% else %}confidence-low{% endif %}">
+                {{ (d.confidence * 100)|round(0)|int }}%
+            </span>
+        </a>
+        {% endfor %}
+    </div>
+    <div style="text-align: center; margin-top: 1rem;">
+        <a href="{{ url_for('diagnosis.history') }}" class="btn btn-outline btn-sm">View all</a>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No diagnoses yet. Upload your first leaf image to get started.</p>
+        <a href="{{ url_for('diagnosis.upload') }}" class="btn btn-primary">Start diagnosis</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

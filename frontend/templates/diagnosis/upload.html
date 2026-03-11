@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Upload - PlantDoc{% endblock %}
+{% block container_class %}container-medium{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Upload leaf image</h1>
+    <p>Take a clear photo of the affected leaf or upload an existing image.</p>
+</div>
+
+<div class="card">
+    <form method="POST" action="{{ url_for('diagnosis.upload') }}" enctype="multipart/form-data">
+        <div class="upload-zone" id="upload-zone">
+            <div class="upload-zone-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+                </svg>
+            </div>
+            <div class="upload-zone-title">Click to upload or drag and drop</div>
+            <div class="upload-zone-subtitle">JPEG or PNG, max 10 MB</div>
+        </div>
+        <input type="file" name="image" id="image-input" accept="image/jpeg,image/png" style="display: none;" required>
+        <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none;">
+
+        <div class="upload-preview" id="upload-preview">
+            <img id="preview-img" src="" alt="Preview">
+            <div class="upload-preview-name" id="preview-name"></div>
+        </div>
+
+        <div class="upload-actions">
+            <button type="button" id="camera-btn" class="btn btn-outline">Use camera</button>
+            <button type="submit" class="btn btn-primary">Analyze image</button>
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    <div class="card-title">Tips for better results</div>
+    <ul class="tips-list">
+        <li>Use natural daylight for best image quality</li>
+        <li>Focus on a single leaf that shows clear symptoms</li>
+        <li>Keep the image sharp and in focus</li>
+        <li>Include both healthy and affected areas of the leaf</li>
+    </ul>
+</div>
+{% endblock %}
