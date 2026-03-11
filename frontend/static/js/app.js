@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     initNavToggle();
     initUploadZone();
     initFlashDismiss();
+    initAnalyzeLoader();
 });
 
 
@@ -90,6 +91,24 @@ function initUploadZone() {
         };
         reader.readAsDataURL(file);
     }
+}
+
+
+function initAnalyzeLoader() {
+    var form = document.getElementById("upload-form");
+    if (!form) return;
+
+    form.addEventListener("submit", function () {
+        var btn = form.querySelector(".btn-analyze");
+        if (!btn) return;
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+
+        // Show the overlay
+        var overlay = document.getElementById("loading-overlay");
+        if (overlay) overlay.classList.add("visible");
+    });
 }
 
 

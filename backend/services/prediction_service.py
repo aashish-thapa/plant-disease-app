@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 from backend.models import Disease
 
@@ -49,7 +50,9 @@ class PredictionService:
         if not diseases:
             return "Unknown", 0.0, None
 
-        # --- Prototype: match by original filename keywords ---------------
+        # --- Prototype: simulate model inference time (~8s) ----------------
+        time.sleep(8)
+
         disease_name = self._match_by_filename(original_filename or image_path)
         confidence = round(random.uniform(0.82, 0.97), 2)
 

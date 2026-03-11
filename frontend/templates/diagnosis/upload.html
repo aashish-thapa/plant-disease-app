@@ -3,13 +3,21 @@
 {% block container_class %}container-medium{% endblock %}
 
 {% block content %}
+<div class="loading-overlay" id="loading-overlay">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Analyzing your image...</div>
+        <div class="loading-subtext">Running disease detection model</div>
+    </div>
+</div>
+
 <div class="page-header">
     <h1>Upload leaf image</h1>
     <p>Take a clear photo of the affected leaf or upload an existing image.</p>
 </div>
 
 <div class="card">
-    <form method="POST" action="{{ url_for('diagnosis.upload') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ url_for('diagnosis.upload') }}" enctype="multipart/form-data" id="upload-form">
         <div class="upload-zone" id="upload-zone">
             <div class="upload-zone-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -29,7 +37,7 @@
 
         <div class="upload-actions">
             <button type="button" id="camera-btn" class="btn btn-outline">Use camera</button>
-            <button type="submit" class="btn btn-primary">Analyze image</button>
+            <button type="submit" class="btn btn-primary btn-analyze">Analyze image</button>
         </div>
     </form>
 </div>
