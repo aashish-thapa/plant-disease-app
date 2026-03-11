@@ -58,6 +58,7 @@ plant-disease-app/
 ## How to run it
 
 ```bash
+git clone https://github.com/aashish-thapa/plant-disease-app
 cd plant-disease-app
 
 # Create a virtual environment and activate it
