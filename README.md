@@ -79,8 +79,7 @@ An admin account is created automatically on first run:
 | Role | Email | Password |
 |------|-------|----------|
 | Admin | admin@plantdoc.com | admin123 |
-
-Register a new account through the app to test the farmer flow.
+| Farmer | farmer@demo.com | demo123 |
 
 Five demo images are included in `demo_images/` for testing uploads:
 - `tomato_early_blight.jpg`
